@@ -1,8 +1,16 @@
-//import { AngularFireDatabaseModule, AngularFireAuthModule } from 'angularfire';
+import { ProductService } from './product.service';
+import { CategoryService } from './category.service';
+import { AdminAuthGuard } from './admin-auth-guard.service';
+import { AuthGuard } from './auth-guard.service';
+import { AuthService } from './auth.service';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CustomFormsModule } from 'ng2-validation';
+//import { DataTableModule } from 'angular-4-data-table';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +26,12 @@ import { AdmProductsComponent } from './admin/adm-products/adm-products.componen
 import { AdmOrdersComponent } from './admin/adm-orders/adm-orders.component';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
+import { UserService } from './user.service';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { FormsModule } from '@angular/forms';
+import { ProductViewComponent } from './admin/product-view/product-view.component';
+import { ProductFilterComponent } from './products/product-filter/product-filter.component';
+import { ProductCardComponent } from './product-card/product-card.component';
 
 @NgModule({
   declarations: [
@@ -31,28 +45,47 @@ import { LoginComponent } from './login/login.component';
     MyOrdersComponent,
     AdmProductsComponent,
     AdmOrdersComponent,
-    LoginComponent
+    LoginComponent,
+    ProductFormComponent,
+    ProductViewComponent,
+    ProductFilterComponent,
+    ProductCardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    CustomFormsModule,
+    //DataTableModule,
     NgbModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
-    //AngularFireDatabaseModule,
-    //AngularFireAuthModule,
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent },
-      { path: 'my/orders', component: MyOrdersComponent },
+      { path: '', component: ProductsComponent },
       { path: 'products', component: ProductsComponent },
-      { path: 'shopping-cart', component: ShoppingCartComponent },
-      { path: 'check-out', component: CheckOutComponent },
-      { path: 'order-success', component: OrderSuccessComponent },
       { path: 'login', component: LoginComponent },
-      { path: 'admin/products', component: AdmProductsComponent },
-      { path: 'admin/orders', component: AdmOrdersComponent }
+
+      { path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuard] },
+      { path: 'shopping-cart', component: ShoppingCartComponent, canActivate: [AuthGuard] },
+      { path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuard] },
+      { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuard] },
+      
+      { path: 'admin/products', component: AdmProductsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+      { path: 'admin/products/new', component: ProductFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+      { path: 'admin/products/:id', component: ProductFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+      { path: 'admin/products/view/:id', component: ProductViewComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+      { path: 'admin/orders', component: AdmOrdersComponent, canActivate: [AuthGuard, AdminAuthGuard] }
     ])
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    AuthGuard,
+    UserService,
+    AdminAuthGuard,
+    CategoryService,
+    ProductService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

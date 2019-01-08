@@ -1,3 +1,52 @@
 <p>
-  adm-products works!
+  <a routerLink="/admin/products/new" class="btn btn-primary">New Product</a>
 </p>
+<p>
+  <input #query (keyup)="filter(query.value)" type="text" class="form-control" placeholder="Search">
+</p>
+<!-- <data-table [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)">
+  <data-table-column [property]="'title'" [header]="'Title'" [sortable]="true" [resizable]="true" />
+  <data-table-column [property]="'price'" [header]="'Price'" [sortable]="true" [resizable]="true">
+    <ng-template #dataTableCell let-item="item">
+      {{ item.price | current:'USD':true }}
+    </ng-template>
+  </data-table-column>
+  <data-table-column [property]="'$key'">
+    <ng-template #dataTableCell let-item="item">
+      <a [routerLink]="['/admin/products/', p.key]">Edit</a>
+      <button class="deleteButton" (click)="delete(p.key)">Delete</button>
+    </ng-template>
+  </data-table-column>
+</data-table> -->
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Price</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of filteredProducts">
+      <td>{{ p.title }}</td>
+      <!-- <td>
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#exampleModalCenter">
+          {{ p.title }}
+        </button>
+      </td> -->
+      <td>{{ p.price }}</td>
+      <td>
+        <a [routerLink]="['/admin/products/', p.key]">Edit</a>
+        <button class="deleteButton" (click)="delete(p.key)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
