@@ -4,7 +4,7 @@ A basic **Organic** shopping e-commerce website based on Angular JS and Firebase
 
 ### Direct access to the website
 
-You can access the current working example of the website at this [link] (https://organic-shop-46a66.firebaseapp.com).
+You can access the current working example of the website at this [link](https://organic-shop-46a66.firebaseapp.com).
 
 ### Download the source code
 
