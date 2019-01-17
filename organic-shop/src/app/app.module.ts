@@ -1,3 +1,4 @@
+import { ShoppingCartService } from './shopping-cart.service';
 import { ProductService } from './product.service';
 import { CategoryService } from './category.service';
 import { AdminAuthGuard } from './admin-auth-guard.service';
@@ -32,6 +33,9 @@ import { FormsModule } from '@angular/forms';
 import { ProductViewComponent } from './admin/product-view/product-view.component';
 import { ProductFilterComponent } from './products/product-filter/product-filter.component';
 import { ProductCardComponent } from './product-card/product-card.component';
+import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
+import { OrderService } from './order.service';
+import { CheckoutSummaryComponent } from './checkout-summary/checkout-summary.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +53,9 @@ import { ProductCardComponent } from './product-card/product-card.component';
     ProductFormComponent,
     ProductViewComponent,
     ProductFilterComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    ProductQuantityComponent,
+    CheckoutSummaryComponent
   ],
   imports: [
     BrowserModule,
@@ -62,14 +68,15 @@ import { ProductCardComponent } from './product-card/product-card.component';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     RouterModule.forRoot([
-      { path: '', component: ProductsComponent },
+      { path: '', component: HomeComponent },
       { path: 'products', component: ProductsComponent },
       { path: 'login', component: LoginComponent },
+      { path: 'shopping-cart', component: ShoppingCartComponent },
+      { path: 'product/:id', component: ProductViewComponent },
 
       { path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuard] },
-      { path: 'shopping-cart', component: ShoppingCartComponent, canActivate: [AuthGuard] },
       { path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuard] },
-      { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuard] },
+      { path: 'order-success/:id', component: OrderSuccessComponent, canActivate: [AuthGuard] },
       
       { path: 'admin/products', component: AdmProductsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
       { path: 'admin/products/new', component: ProductFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
@@ -84,7 +91,9 @@ import { ProductCardComponent } from './product-card/product-card.component';
     UserService,
     AdminAuthGuard,
     CategoryService,
-    ProductService
+    ProductService,
+    ShoppingCartService,
+    OrderService
   ],
   bootstrap: [AppComponent]
 })

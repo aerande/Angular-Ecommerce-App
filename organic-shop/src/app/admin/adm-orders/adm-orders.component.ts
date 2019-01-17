@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OrderService } from 'src/app/order.service';
 
 @Component({
   selector: 'app-adm-orders',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./adm-orders.component.css']
 })
 export class AdmOrdersComponent implements OnInit {
+  orders;
 
-  constructor() { }
+  constructor(private orderService: OrderService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.orderService.getOrders().take(1).subscribe(orders => this.orders = orders);
   }
-
 }

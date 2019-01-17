@@ -30,12 +30,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let p of filteredProducts">
-      <td>{{ p.title }}</td>
-      <!-- <td>
-        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#exampleModalCenter">
-          {{ p.title }}
-        </button>
-      </td> -->
+      <td><a [routerLink]="['/product', p.key]">{{ p.title }}</a></td>
       <td>{{ p.price }}</td>
       <td>
         <a [routerLink]="['/admin/products/', p.key]">Edit</a>

@@ -1,3 +1,21 @@
-<p>
-  my-orders works!
-</p>
+<h2>My Orders</h2>
+<table class="table" style="margin-top: 40px;">
+  <thead>
+    <tr>
+      <th>Customer Name</th>
+      <th>Date</th>
+      <th>Order Total</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let o of orders">
+      <td>{{ o.shipping.firstName }} {{ o.shipping.lastName }}</td>
+      <td>{{ o.datePlaced | date }}</td>
+      <td><strong>{{ o.totalPrice | currency:'USD':true }}</strong></td>
+      <td>Pending</td>
+      <td><a href="#">View</a></td>
+    </tr>
+  </tbody>
+</table>

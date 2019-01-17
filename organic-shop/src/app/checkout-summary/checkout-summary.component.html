@@ -1,0 +1,27 @@
+<h4 class="d-flex justify-content-between align-items-center mb-3">
+  <span class="text-muted">Order Summary</span>
+  <span class="badge badge-secondary badge-pill">{{itemCount}}</span>
+</h4>
+<ul class="list-group mb-3">
+  <li *ngFor="let p of products | async" class="list-group-item d-flex justify-content-between lh-condensed">
+    <div>
+      <h6 class="my-0">{{ p.quantity }} x {{ p.product.title }}</h6>
+      <small class="text-muted">Price: {{ p.product.price | currency:'USD':true }}</small>
+    </div>
+    <span class="text-muted">{{ p.product.price * p.quantity | currency:'USD':true }}</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between">
+    <span>Total (USD)</span>
+    <strong>{{ totalPrice | currency:'USD':true }}</strong>
+  </li>
+</ul>
+<button (click)="goBack()" class="btn btn-secondary" style="float: right;">Cancel</button>
+
+<!-- <form class="card p-2">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Promo code">
+        <div class="input-group-append">
+          <button type="submit" class="btn btn-secondary">Redeem</button>
+        </div>
+      </div>
+    </form> -->
