@@ -8,7 +8,7 @@ You can access the current working example of the website at this [link](https:/
 
 # Download the source code
 
-1. Clone the repository in your local machine.
+1. Clone the repository in your *local machine*.
 2. Navigate to the folder organic-shop
 3. Open ***Command Prompt*** and run the following commands:
     1. npm install
