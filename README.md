@@ -10,7 +10,7 @@ You can access the current working example of the website at this [link](https:/
 
 1. Clone the repository in your *local machine*.
 2. Navigate to the folder organic-shop
-3. Open ***Command Prompt*** and run the following commands:
+3. Open ***Command Prompt*** at the above folder location and run the following commands:
     1. npm install
     2. ng serve
 4. Navigate to `http://localhost:4200/`.
